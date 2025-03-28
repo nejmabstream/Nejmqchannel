@@ -1,196 +1,297 @@
--dontoptimize
--microedition
--dontpreverify
--forceprocessing
--verbose
--android
--ignorewarning
--dontwarn **
--dontnote **
--repackageclasses n
--keepattributes SourceFile,LineNumberTable,Signature
--keepattributes *Annotation*
--keepclassmembers class **.R$* {
-    public static <fields>;
-}
-#不能使用混淆
--keep public class * extends android.app.Activity
--keep public class * extends android.app.Application
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
--keep public class * extends android.preference.Preference
--keep public class * extends android.app.backup.BackupAgent
--keep public class * extends android.support.v4.app.Fragment
--keep public class * extends android.app.Fragment
--keep public class * extends android.view.view
--keep public class com.android.vending.licensing.ILicensingService
-
-# 保留support下的所有类及其内部类
--keep class android.support.** {*;}
-
-# 保留继承的
--keep public class  * extends android.support.v4.**
--keep public class  * extends android.support.v7.**
--keep public class  * extends android.support.annotation.**
--keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
-    public <init>(android.content.Context, android.util.AttributeSet);
-}
--keepclasseswithmembernames class * {
-    native <methods>;
-}
--keepclassmembers enum * {
-  public static **[] values();
-  public static ** valueOf(java.lang.String);
-}
--keep public class * extends android.view.View{
-    *** get*();
-    void set*(***);
-    public <init>(android.content.Context);
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-}
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    static final java.io.ObjectStreamField[] serialPersistentFields;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
--assumenoexternalsideeffects class java.lang.StringBuilder {
-    public java.lang.StringBuilder();
-    public java.lang.StringBuilder(int);
-    public java.lang.StringBuilder(java.lang.String);
-    public java.lang.StringBuilder append(java.lang.Object);
-    public java.lang.StringBuilder append(java.lang.String);
-    public java.lang.StringBuilder append(java.lang.StringBuffer);
-    public java.lang.StringBuilder append(char[]);
-    public java.lang.StringBuilder append(char[], int, int);
-    public java.lang.StringBuilder append(boolean);
-    public java.lang.StringBuilder append(char);
-    public java.lang.StringBuilder append(int);
-    public java.lang.StringBuilder append(long);
-    public java.lang.StringBuilder append(float);
-    public java.lang.StringBuilder append(double);
-    public java.lang.String toString();
-}
--assumenoexternalreturnvalues class java.lang.StringBuilder {
-    public java.lang.StringBuilder append(java.lang.Object);
-    public java.lang.StringBuilder append(java.lang.String);
-    public java.lang.StringBuilder append(java.lang.StringBuffer);
-    public java.lang.StringBuilder append(char[]);
-    public java.lang.StringBuilder append(char[], int, int);
-    public java.lang.StringBuilder append(boolean);
-    public java.lang.StringBuilder append(char);
-    public java.lang.StringBuilder append(int);
-    public java.lang.StringBuilder append(long);
-    public java.lang.StringBuilder append(float);
-    public java.lang.StringBuilder append(double);
-}
--keep @interface butterknife.*
--keepclasseswithmembers class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembers class * {
-    @butterknife.* <methods>;
-}
--keepclasseswithmembers class * {
-    @butterknife.On* <methods>;
-}
--keep class **$$ViewInjector {
-    public static void inject(...);
-    public static void reset(...);
-}
--keep class **$$ViewBinder {
-    public static void bind(...);
-    public static void unbind(...);
-}
--if   class **$$ViewBinder
--keep class <1>
--keep class **_ViewBinding {
-    <init>(<1>, android.view.View);
-}
--if   class **_ViewBinding
--keep class <1>
--assumenosideeffects class android.util.Log {
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
-}
--adaptresourcefilenames    **.properties,**.gif,**.jpg
--adaptresourcefilecontents **.properties,META-INF/MANIFEST.MF
--allowaccessmodification
--mergeinterfacesaggressively
-
--useuniqueclassmembernames
-
--keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>();
-}
--keep public class * extends android.support.v7.widget.RecyclerView$LayoutManager {
-    public <init>(...);
-}
--keepclassmembers class android.support.graphics.drawable.VectorDrawableCompat$* {
-   void set*(***);
-   *** get*();
-}
--keep class * implements android.os.Parcelable {
-    public static final android.os.Parcelable$Creator *;
-}
--keepclassmembers class * {
-    void *(**On*Event);
-    void *(**On*Listener);
-}
-
--keepclassmembers class fqcn.of.javascript.interface.for.Webview {
-   public *;
-}
-#JS 调用Java 方法
--keepattributes *JavascriptInterface*
--keepclassmembers class * extends android.webkit.WebViewClient {
-    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
-    public boolean *(android.webkit.WebView, java.lang.String);
-}
--keepclassmembers class * extends android.webkit.WebViewClient {
-    public void *(android.webkit.WebView, jav.lang.String);
-}
--keep @android.support.annotation.Keep class * {*;}
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <methods>;
-}
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <fields>;
-}
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <init>(...);
-}
--keepclassmembers class * extends android.content.Context {
-   public void *(android.view.View);
-   public void *(android.view.MenuItem);
-}
--keep class android.support.v7.widget.RoundRectDrawable { *; }
--keep public class android.support.v7.widget.** { *; }
--keep public class android.support.v7.internal.widget.** { *; }
--keep public class android.support.v7.internal.view.menu.** { *; }
--keep public class * extends android.support.v4.view.ActionProvider {
-    public <init>(android.content.Context);
-}
--keepclassmembers class android.support.v7.preference.PreferenceGroupAdapter {
-    private ** mPreferenceLayouts;
-}
--keepclassmembers class android.support.v7.preference.PreferenceGroupAdapter$PreferenceLayout {
-    private int resId;
-    private int widgetResId;
-}
-
-# androidx
--keep class androidx.** { *; }
-
-# javax，java
--keep class java.** { *; }
--keep class javax.** { *; }
+#EXTM3U
+#EXTINF:-1,1
+https://dokko1new.iosplayer.ru/dokko1/premium91/mono.m3u8
+#EXTINF:-1,2
+https://dokko1new.iosplayer.ru/dokko1/premium65/mono.m3u8
+#EXTINF:-1,3
+https://dokko1new.iosplayer.ru/dokko1/premium86/mono.m3u8
+#EXTINF:-1,4
+https://dokko1new.iosplayer.ru/dokko1/premium91/mono.m3u8
+#EXTINF:-1,5
+https://dokko1new.iosplayer.ru/dokko1/premium97/mono.m3u8
+#EXTINF:-1,6
+https://dokko1new.iosplayer.ru/dokko1/premium93/mono.m3u8
+#EXTINF:-1,7
+https://dokko1new.iosplayer.ru/dokko1/premium92/mono.m3u8
+#EXTINF:-1,8
+https://dokko1new.iosplayer.ru/dokko1/premium94/mono.m3u8
+#EXTINF:-1,9
+https://dokko1new.iosplayer.ru/dokko1/premium95/mono.m3u8
+#EXTINF:-1,10
+https://dokko1new.iosplayer.ru/dokko1/premium96/mono.m3u8
+#EXTINF:-1,11
+https://dokko1new.iosplayer.ru/dokko1/premium130/mono.m3u8
+#EXTINF:-1,12
+https://dokko1new.iosplayer.ru/dokko1/premium153/mono.m3u8
+#EXTINF:-1,13
+https://dokko1new.iosplayer.ru/dokko1/premium156/mono.m3u8
+#EXTINF:-1,14
+https://dokko1new.iosplayer.ru/dokko1/premium157/mono.m3u8
+#EXTINF:-1,15
+https://dokko1new.iosplayer.ru/dokko1/premium158/mono.m3u8
+#EXTINF:-1,16
+https://dokko1new.iosplayer.ru/dokko1/premium159/mono.m3u8
+#EXTINF:-1,17
+https://dokko1new.iosplayer.ru/dokko1/premium348/mono.m3u8
+#EXTINF:-1,18
+https://dokko1new.iosplayer.ru/dokko1/premium341/mono.m3u8
+#EXTINF:-1,19
+https://dokko1new.iosplayer.ru/dokko1/premium350/mono.m3u8
+#EXTINF:-1,20
+https://dokko1new.iosplayer.ru/dokko1/premium349/mono.m3u8
+#EXTINF:-1,21
+https://dokko1new.iosplayer.ru/dokko1/premium359/mono.m3u8
+#EXTINF:-1,22
+https://dokko1new.iosplayer.ru/dokko1/premium357/mono.m3u8
+#EXTINF:-1,23
+https://dokko1new.iosplayer.ru/dokko1/premium368/mono.m3u8
+#EXTINF:-1,24
+https://dokko1new.iosplayer.ru/dokko1/premium380/mono.m3u8
+#EXTINF:-1,25
+https://dokko1new.iosplayer.ru/dokko1/premium392/mono.m3u8
+#EXTINF:-1,26
+https://dokko1new.iosplayer.ru/dokko1/premium444/mono.m3u8
+#EXTINF:-1,27
+https://dokko1new.iosplayer.ru/dokko1/premium452/mono.m3u8
+#EXTINF:-1,28
+https://dokko1new.iosplayer.ru/dokko1/premium460/mono.m3u8
+#EXTINF:-1,29
+https://dokko1new.iosplayer.ru/dokko1/premium526/mono.m3u8
+#EXTINF:-1,30
+https://dokko1new.iosplayer.ru/dokko1/premium527/mono.m3u8
+#EXTINF:-1,31
+https://dokko1new.iosplayer.ru/dokko1/premium528/mono.m3u8
+#EXTINF:-1,32
+https://dokko1new.iosplayer.ru/dokko1/premium529/mono.m3u8
+#EXTINF:-1,33
+https://dokko1new.iosplayer.ru/dokko1/premium530/mono.m3u8
+#EXTINF:-1,34
+https://dokko1new.iosplayer.ru/dokko1/premium532/mono.m3u8
+#EXTINF:-1,35
+https://dokko1new.iosplayer.ru/dokko1/premium523/mono.m3u8
+#EXTINF:-1,36
+https://dokko1new.iosplayer.ru/dokko1/premium534/mono.m3u8
+#EXTINF:-1,37
+https://dokko1new.iosplayer.ru/dokko1/premium531/mono.m3u8
+#EXTINF:-1,38
+https://dokko1new.iosplayer.ru/dokko1/premium537/mono.m3u8
+#EXTINF:-1,39
+https://dokko1new.iosplayer.ru/dokko1/premium538/mono.m3u8
+#EXTINF:-1,40
+https://dokko1new.iosplayer.ru/dokko1/premium533/mono.m3u8
+#EXTINF:-1,41
+https://dokko1new.iosplayer.ru/dokko1/premium535/mono.m3u8
+#EXTINF:-1,42
+https://dokko1new.iosplayer.ru/dokko1/premium536/mono.m3u8
+#EXTINF:-1,43
+https://dokko1new.iosplayer.ru/dokko1/premium539/mono.m3u8
+#EXTINF:-1,44
+https://dokko1new.iosplayer.ru/dokko1/premium556/mono.m3u8
+#EXTINF:-1,45
+https://dokko1new.iosplayer.ru/dokko1/premium568/mono.m3u8
+#EXTINF:-1,46
+https://dokko1new.iosplayer.ru/dokko1/premium561/mono.m3u8
+#EXTINF:-1,47
+https://dokko1new.iosplayer.ru/dokko1/premium563/mono.m3u8
+#EXTINF:-1,48
+https://dokko1new.iosplayer.ru/dokko1/premium564/mono.m3u8
+#EXTINF:-1,49
+https://dokko1new.iosplayer.ru/dokko1/premium565/mono.m3u8
+#EXTINF:-1,50
+https://dokko1new.iosplayer.ru/dokko1/premium567/mono.m3u8
+#EXTINF:-1,51
+https://dokko1new.iosplayer.ru/dokko1/premium560/mono.m3u8
+#EXTINF:-1,52
+https://dokko1new.iosplayer.ru/dokko1/premium562/mono.m3u8
+#EXTINF:-1,53
+https://dokko1new.iosplayer.ru/dokko1/premium566/mono.m3u8
+#EXTINF:-1,54
+https://dokko1new.iosplayer.ru/dokko1/premium572/mono.m3u8
+#EXTINF:-1,55
+https://dokko1new.iosplayer.ru/dokko1/premium571/mono.m3u8
+#EXTINF:-1,56
+https://dokko1new.iosplayer.ru/dokko1/premium592/mono.m3u8
+#EXTINF:-1,57
+https://dokko1new.iosplayer.ru/dokko1/premium593/mono.m3u8
+#EXTINF:-1,58
+https://dokko1new.iosplayer.ru/dokko1/premium591/mono.m3u8
+#EXTINF:-1,59
+https://dokko1new.iosplayer.ru/dokko1/premium594/mono.m3u8
+#EXTINF:-1,60
+https://dokko1new.iosplayer.ru/dokko1/premium587/mono.m3u8
+#EXTINF:-1,61
+https://dokko1new.iosplayer.ru/dokko1/premium588/mono.m3u8
+#EXTINF:-1,62
+https://dokko1new.iosplayer.ru/dokko1/premium590/mono.m3u8
+#EXTINF:-1,63
+https://dokko1new.iosplayer.ru/dokko1/premium589/mono.m3u8
+#EXTINF:-1,64
+https://dokko1new.iosplayer.ru/dokko1/premium595/mono.m3u8
+#EXTINF:-1,65
+https://dokko1new.iosplayer.ru/dokko1/premium601/mono.m3u8
+#EXTINF:-1,66
+https://dokko1new.iosplayer.ru/dokko1/premium604/mono.m3u8
+#EXTINF:-1,67
+https://dokko1new.iosplayer.ru/dokko1/premium605/mono.m3u8
+#EXTINF:-1,68
+https://dokko1new.iosplayer.ru/dokko1/premium606/mono.m3u8
+#EXTINF:-1,69
+https://dokko1new.iosplayer.ru/dokko1/premium607/mono.m3u8
+#EXTINF:-1,70
+https://dokko1new.iosplayer.ru/dokko1/premium596/mono.m3u8
+#EXTINF:-1,71
+https://dokko1new.iosplayer.ru/dokko1/premium603/mono.m3u8
+#EXTINF:-1,72
+https://dokko1new.iosplayer.ru/dokko1/premium620/mono.m3u8
+#EXTINF:-1,73
+https://dokko1new.iosplayer.ru/dokko1/premium619/mono.m3u8
+#EXTINF:-1,74
+https://dokko1new.iosplayer.ru/dokko1/premium610/mono.m3u8
+#EXTINF:-1,75
+https://dokko1new.iosplayer.ru/dokko1/premium609/mono.m3u8
+#EXTINF:-1,76
+https://dokko1new.iosplayer.ru/dokko1/premium623/mono.m3u8
+#EXTINF:-1,77
+https://dokko1new.iosplayer.ru/dokko1/premium628/mono.m3u8
+#EXTINF:-1,78
+https://dokko1new.iosplayer.ru/dokko1/premium629/mono.m3u8
+#EXTINF:-1,79
+https://dokko1new.iosplayer.ru/dokko1/premium624/mono.m3u8
+#EXTINF:-1,80
+https://dokko1new.iosplayer.ru/dokko1/premium626/mono.m3u8
+#EXTINF:-1,81
+https://dokko1new.iosplayer.ru/dokko1/premium625/mono.m3u8
+#EXTINF:-1,82
+https://dokko1new.iosplayer.ru/dokko1/premium627/mono.m3u8
+#EXTINF:-1,83
+https://dokko1new.iosplayer.ru/dokko1/premium621/mono.m3u8
+#EXTINF:-1,84
+https://dokko1new.iosplayer.ru/dokko1/premium630/mono.m3u8
+#EXTINF:-1,85
+https://dokko1new.iosplayer.ru/dokko1/premium622/mono.m3u8
+#EXTINF:-1,86
+https://dokko1new.iosplayer.ru/dokko1/premium633/mono.m3u8
+#EXTINF:-1,87
+https://dokko1new.iosplayer.ru/dokko1/premium636/mono.m3u8
+#EXTINF:-1,88
+https://dokko1new.iosplayer.ru/dokko1/premium635/mono.m3u8
+#EXTINF:-1,89
+https://dokko1new.iosplayer.ru/dokko1/premium634/mono.m3u8
+#EXTINF:-1,90
+https://dokko1new.iosplayer.ru/dokko1/premium631/mono.m3u8
+#EXTINF:-1,91
+https://dokko1new.iosplayer.ru/dokko1/premium639/mono.m3u8
+#EXTINF:-1,92
+https://dokko1new.iosplayer.ru/dokko1/premium638/mono.m3u8
+#EXTINF:-1,93
+https://dokko1new.iosplayer.ru/dokko1/premium637/mono.m3u8
+#EXTINF:-1,94
+https://dokko1new.iosplayer.ru/dokko1/premium632/mono.m3u8
+#EXTINF:-1,95
+https://dokko1new.iosplayer.ru/dokko1/premium640/mono.m3u8
+#EXTINF:-1,96
+https://dokko1new.iosplayer.ru/dokko1/premium645/mono.m3u8
+#EXTINF:-1,97
+https://dokko1new.iosplayer.ru/dokko1/premium642/mono.m3u8
+#EXTINF:-1,98
+https://dokko1new.iosplayer.ru/dokko1/premium649/mono.m3u8
+#EXTINF:-1,99
+https://dokko1new.iosplayer.ru/dokko1/premium643/mono.m3u8
+#EXTINF:-1,100
+https://dokko1new.iosplayer.ru/dokko1/premium647/mono.m3u8
+#EXTINF:-1,101
+https://dokko1new.iosplayer.ru/dokko1/premium648/mono.m3u8
+#EXTINF:-1,102
+https://dokko1new.iosplayer.ru/dokko1/premium650/mono.m3u8
+#EXTINF:-1,103
+https://dokko1new.iosplayer.ru/dokko1/premium651/mono.m3u8
+#EXTINF:-1,104
+https://dokko1new.iosplayer.ru/dokko1/premium657/mono.m3u8
+#EXTINF:-1,105
+https://dokko1new.iosplayer.ru/dokko1/premium658/mono.m3u8
+#EXTINF:-1,106
+https://dokko1new.iosplayer.ru/dokko1/premium659/mono.m3u8
+#EXTINF:-1,107
+https://dokko1new.iosplayer.ru/dokko1/premium661/mono.m3u8
+#EXTINF:-1,108
+https://dokko1new.iosplayer.ru/dokko1/premium660/mono.m3u8
+#EXTINF:-1,109
+https://dokko1new.iosplayer.ru/dokko1/premium669/mono.m3u8
+#EXTINF:-1,110
+https://dokko1new.iosplayer.ru/dokko1/premium670/mono.m3u8
+#EXTINF:-1,111
+https://dokko1new.iosplayer.ru/dokko1/premium665/mono.m3u8
+#EXTINF:-1,112
+https://dokko1new.iosplayer.ru/dokko1/premium663/mono.m3u8
+#EXTINF:-1,113
+https://dokko1new.iosplayer.ru/dokko1/premium664/mono.m3u8
+#EXTINF:-1,114
+https://dokko1new.iosplayer.ru/dokko1/premium697/mono.m3u8
+#EXTINF:-1,115
+https://dokko1new.iosplayer.ru/dokko1/premium698/mono.m3u8
+#EXTINF:-1,116
+https://dokko1new.iosplayer.ru/dokko1/premium751/mono.m3u8
+#EXTINF:-1,117
+https://dokko1new.iosplayer.ru/dokko1/premium752/mono.m3u8
+#EXTINF:-1,118
+https://dokko1new.iosplayer.ru/dokko1/premium780/mono.m3u8
+#EXTINF:-1,119
+https://dokko1new.iosplayer.ru/dokko1/premium782/mono.m3u8
+#EXTINF:-1,120
+https://dokko1new.iosplayer.ru/dokko1/premium783/mono.m3u8
+#EXTINF:-1,121
+https://dokko1new.iosplayer.ru/dokko1/premium784/mono.m3u8
+#EXTINF:-1,122
+https://dokko1new.iosplayer.ru/dokko1/premium778/mono.m3u8
+#EXTINF:-1,123
+https://dokko1new.iosplayer.ru/dokko1/premium781/mono.m3u8
+#EXTINF:-1,124
+https://dokko1new.iosplayer.ru/dokko1/premium779/mono.m3u8
+#EXTINF:-1,125
+https://dokko1new.iosplayer.ru/dokko1/premium798/mono.m3u8
+#EXTINF:-1,126
+https://dokko1new.iosplayer.ru/dokko1/premium800/mono.m3u8
+#EXTINF:-1,127
+https://dokko1new.iosplayer.ru/dokko1/premium802/mono.m3u8
+#EXTINF:-1,128
+https://dokko1new.iosplayer.ru/dokko1/premium810/mono.m3u8
+#EXTINF:-1,129
+https://dokko1new.iosplayer.ru/dokko1/premium803/mono.m3u8
+#EXTINF:-1,130
+https://dokko1new.iosplayer.ru/dokko1/premium805/mono.m3u8
+#EXTINF:-1,131
+https://dokko1new.iosplayer.ru/dokko1/premium811/mono.m3u8
+#EXTINF:-1,132
+https://dokko1new.iosplayer.ru/dokko1/premium804/mono.m3u8
+#EXTINF:-1,133
+https://dokko1new.iosplayer.ru/dokko1/premium807/mono.m3u8
+#EXTINF:-1,134
+https://dokko1new.iosplayer.ru/dokko1/premium808/mono.m3u8
+#EXTINF:-1,135
+https://dokko1new.iosplayer.ru/dokko1/premium835/mono.m3u8
+#EXTINF:-1,136
+https://dokko1new.iosplayer.ru/dokko1/premium834/mono.m3u8
+#EXTINF:-1,137
+https://dokko1new.iosplayer.ru/dokko1/premium833/mono.m3u8
+#EXTINF:-1,138
+https://dokko1new.iosplayer.ru/dokko1/premium832/mono.m3u8
+#EXTINF:-1,139
+https://dokko1new.iosplayer.ru/dokko1/premium836/mono.m3u8
+#EXTINF:-1,140
+https://dokko1new.iosplayer.ru/dokko1/premium840/mono.m3u8
+#EXTINF:-1,141
+https://dokko1new.iosplayer.ru/dokko1/premium839/mono.m3u8
+#EXTINF:-1,142
+https://dokko1new.iosplayer.ru/dokko1/premium842/mono.m3u8
+#EXTINF:-1,143
+https://dokko1new.iosplayer.ru/dokko1/premium845/mono.m3u8
+#EXTINF:-1,144
+https://dokko1new.iosplayer.ru/dokko1/premium841/mono.m3u8
+#EXTINF:-1,145
+https://dokko1new.iosplayer.ru/dokko1/premium920/mono.m3u8
+#EXTINF:-1,146
+https://dokko1new.iosplayer.ru/dokko1/premium921/mono.m3u8
+#EXTINF:-1,147
+https://dokko1new.iosplayer.ru/dokko1/premium950/mono.m3u8
+#EXTINF:-1,148
+https://dokko1new.iosplayer.ru/dokko1/premium951/mono.m3u8
