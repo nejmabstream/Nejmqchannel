@@ -1,1 +1,21 @@
-kwwkwk
+local socket = require("socket")
+local host = "127.0.0.1"
+local port = 12345
+local client = socket.tcp()
+
+-- الاتصال بالسيرفر (Python)
+client:connect(host, port)
+
+-- البحث عن القيم في الذاكرة
+gg.clearResults()
+gg.searchNumber("1000", gg.TYPE_DWORD)
+local results = gg.getResults(10)
+
+-- إرسال البيانات
+for i, v in ipairs(results) do
+    local data = "Address: " .. v.address .. " Value: " .. v.value .. "\n"
+    client:send(data)
+end
+
+gg.toast("تم إرسال البيانات إلى Python!")
+client:close()
