@@ -1,196 +1,175 @@
--dontoptimize
--microedition
--dontpreverify
--forceprocessing
--verbose
--android
--ignorewarning
--dontwarn **
--dontnote **
--repackageclasses n
--keepattributes SourceFile,LineNumberTable,Signature
--keepattributes *Annotation*
--keepclassmembers class **.R$* {
-    public static <fields>;
-}
-#不能使用混淆
--keep public class * extends android.app.Activity
--keep public class * extends android.app.Application
--keep public class * extends android.app.Service
--keep public class * extends android.content.BroadcastReceiver
--keep public class * extends android.content.ContentProvider
--keep public class * extends android.preference.Preference
--keep public class * extends android.app.backup.BackupAgent
--keep public class * extends android.support.v4.app.Fragment
--keep public class * extends android.app.Fragment
--keep public class * extends android.view.view
--keep public class com.android.vending.licensing.ILicensingService
-
-# 保留support下的所有类及其内部类
--keep class android.support.** {*;}
-
-# 保留继承的
--keep public class  * extends android.support.v4.**
--keep public class  * extends android.support.v7.**
--keep public class  * extends android.support.annotation.**
--keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
-    public <init>(android.content.Context, android.util.AttributeSet);
-}
--keepclasseswithmembernames class * {
-    native <methods>;
-}
--keepclassmembers enum * {
-  public static **[] values();
-  public static ** valueOf(java.lang.String);
-}
--keep public class * extends android.view.View{
-    *** get*();
-    void set*(***);
-    public <init>(android.content.Context);
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>(android.content.Context, android.util.AttributeSet, int);
-}
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    static final java.io.ObjectStreamField[] serialPersistentFields;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
--assumenoexternalsideeffects class java.lang.StringBuilder {
-    public java.lang.StringBuilder();
-    public java.lang.StringBuilder(int);
-    public java.lang.StringBuilder(java.lang.String);
-    public java.lang.StringBuilder append(java.lang.Object);
-    public java.lang.StringBuilder append(java.lang.String);
-    public java.lang.StringBuilder append(java.lang.StringBuffer);
-    public java.lang.StringBuilder append(char[]);
-    public java.lang.StringBuilder append(char[], int, int);
-    public java.lang.StringBuilder append(boolean);
-    public java.lang.StringBuilder append(char);
-    public java.lang.StringBuilder append(int);
-    public java.lang.StringBuilder append(long);
-    public java.lang.StringBuilder append(float);
-    public java.lang.StringBuilder append(double);
-    public java.lang.String toString();
-}
--assumenoexternalreturnvalues class java.lang.StringBuilder {
-    public java.lang.StringBuilder append(java.lang.Object);
-    public java.lang.StringBuilder append(java.lang.String);
-    public java.lang.StringBuilder append(java.lang.StringBuffer);
-    public java.lang.StringBuilder append(char[]);
-    public java.lang.StringBuilder append(char[], int, int);
-    public java.lang.StringBuilder append(boolean);
-    public java.lang.StringBuilder append(char);
-    public java.lang.StringBuilder append(int);
-    public java.lang.StringBuilder append(long);
-    public java.lang.StringBuilder append(float);
-    public java.lang.StringBuilder append(double);
-}
--keep @interface butterknife.*
--keepclasseswithmembers class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembers class * {
-    @butterknife.* <methods>;
-}
--keepclasseswithmembers class * {
-    @butterknife.On* <methods>;
-}
--keep class **$$ViewInjector {
-    public static void inject(...);
-    public static void reset(...);
-}
--keep class **$$ViewBinder {
-    public static void bind(...);
-    public static void unbind(...);
-}
--if   class **$$ViewBinder
--keep class <1>
--keep class **_ViewBinding {
-    <init>(<1>, android.view.View);
-}
--if   class **_ViewBinding
--keep class <1>
--assumenosideeffects class android.util.Log {
-    public static boolean isLoggable(java.lang.String, int);
-    public static int v(...);
-    public static int i(...);
-    public static int w(...);
-    public static int d(...);
-    public static int e(...);
-}
--adaptresourcefilenames    **.properties,**.gif,**.jpg
--adaptresourcefilecontents **.properties,META-INF/MANIFEST.MF
--allowaccessmodification
--mergeinterfacesaggressively
-
--useuniqueclassmembernames
-
--keep public class * extends android.support.design.widget.CoordinatorLayout$Behavior {
-    public <init>(android.content.Context, android.util.AttributeSet);
-    public <init>();
-}
--keep public class * extends android.support.v7.widget.RecyclerView$LayoutManager {
-    public <init>(...);
-}
--keepclassmembers class android.support.graphics.drawable.VectorDrawableCompat$* {
-   void set*(***);
-   *** get*();
-}
--keep class * implements android.os.Parcelable {
-    public static final android.os.Parcelable$Creator *;
-}
--keepclassmembers class * {
-    void *(**On*Event);
-    void *(**On*Listener);
-}
-
--keepclassmembers class fqcn.of.javascript.interface.for.Webview {
-   public *;
-}
-#JS 调用Java 方法
--keepattributes *JavascriptInterface*
--keepclassmembers class * extends android.webkit.WebViewClient {
-    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
-    public boolean *(android.webkit.WebView, java.lang.String);
-}
--keepclassmembers class * extends android.webkit.WebViewClient {
-    public void *(android.webkit.WebView, jav.lang.String);
-}
--keep @android.support.annotation.Keep class * {*;}
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <methods>;
-}
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <fields>;
-}
--keepclasseswithmembers class * {
-    @android.support.annotation.Keep <init>(...);
-}
--keepclassmembers class * extends android.content.Context {
-   public void *(android.view.View);
-   public void *(android.view.MenuItem);
-}
--keep class android.support.v7.widget.RoundRectDrawable { *; }
--keep public class android.support.v7.widget.** { *; }
--keep public class android.support.v7.internal.widget.** { *; }
--keep public class android.support.v7.internal.view.menu.** { *; }
--keep public class * extends android.support.v4.view.ActionProvider {
-    public <init>(android.content.Context);
-}
--keepclassmembers class android.support.v7.preference.PreferenceGroupAdapter {
-    private ** mPreferenceLayouts;
-}
--keepclassmembers class android.support.v7.preference.PreferenceGroupAdapter$PreferenceLayout {
-    private int resId;
-    private int widgetResId;
-}
-
-# androidx
--keep class androidx.** { *; }
-
-# javax，java
--keep class java.** { *; }
--keep class javax.** { *; }
+#EXTM3U
+#EXTINF:-1,beIN SPORTS GLOBAL HD 
+http://magott.net:80/morad-assurance/29KQUPABHs/3
+#EXTINF:-1,beIN SPORTS GLOBAL FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/63516
+#EXTINF:-1,beIN SPORTS NEWS HD
+http://magott.net:80/morad-assurance/29KQUPABHs/5
+#EXTINF:-1,beIN SPORTS NEWS FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/63515
+#EXTINF:-1,beIN SPORTS 1 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/24
+#EXTINF:-1,beIN SPORTS 1 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/23
+#EXTINF:-1,beIN SPORTS 1 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26533
+#EXTINF:-1,beIN SPORTS 1 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/71
+#EXTINF:-1,beIN SPORTS 1 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/22
+#EXTINF:-1,beIN SPORTS 2 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/27
+#EXTINF:-1,beIN SPORTS 2 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/26
+#EXTINF:-1,beIN SPORTS 2 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26534
+#EXTINF:-1,beIN SPORTS 2 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/72
+#EXTINF:-1,beIN SPORTS 2 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/25
+#EXTINF:-1,beIN SPORTS 3 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/30
+#EXTINF:-1,beIN SPORTS 3 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/29
+#EXTINF:-1,beIN SPORTS 3 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26535
+#EXTINF:-1,beIN SPORTS 3 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/73
+#EXTINF:-1,beIN SPORTS 3 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/28
+#EXTINF:-1,beIN SPORTS 4 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/33
+#EXTINF:-1,beIN SPORTS 4 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/32
+#EXTINF:-1,beIN SPORTS 4 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26536
+#EXTINF:-1,beIN SPORTS 4 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/74
+#EXTINF:-1,beIN SPORTS 4 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/31
+#EXTINF:-1,beIN SPORTS 5 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/36
+#EXTINF:-1,beIN SPORTS 5 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/35
+#EXTINF:-1,beIN SPORTS 5 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26537
+#EXTINF:-1,beIN SPORTS 5 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/75
+#EXTINF:-1,beIN SPORTS 5 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/34
+#EXTINF:-1,beIN SPORTS 6 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/39
+#EXTINF:-1,beIN SPORTS 6 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/38
+#EXTINF:-1,beIN SPORTS 6 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26538
+#EXTINF:-1,beIN SPORTS 6 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/37
+#EXTINF:-1,beIN SPORTS 6 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/76
+#EXTINF:-1,beIN SPORTS 7 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/42
+#EXTINF:-1,beIN SPORTS 7 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/41
+#EXTINF:-1,beIN SPORTS 7 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/26539
+#EXTINF:-1,beIN SPORTS 7 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/77
+#EXTINF:-1,beIN SPORTS 7 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/40
+#EXTINF:-1,beIN SPORTS 8 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/48
+#EXTINF:-1,beIN SPORTS 8 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/47
+#EXTINF:-1,beIN SPORTS 8 HD s2 
+http://magott.net:80/morad-assurance/29KQUPABHs/25739
+#EXTINF:-1,beIN SPORTS 8 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/79
+#EXTINF:-1,beIN SPORTS 8 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/46
+#EXTINF:-1,beIN SPORTS 9 SD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/51
+#EXTINF:-1,beIN SPORTS 9 HD s1
+http://magott.net:80/morad-assurance/29KQUPABHs/50
+#EXTINF:-1,beIN SPORTS 9 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/25740
+#EXTINF:-1,beIN SPORTS 9 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/80
+#EXTINF:-1,beIN SPORTS 9 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/49
+#EXTINF:-1,BeINSport FRENCH 1 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/59
+#EXTINF:-1,BeINSport FRENCH 2 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/61
+#EXTINF:-1,BeINSport FRENCH 3 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/63
+#EXTINF:-1,BeINSport ENGLISH 1 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/53
+#EXTINF:-1,BeINSport ENGLISH 2 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/55
+#EXTINF:-1,beIN SPORTS XTRA 1 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/25734
+#EXTINF:-1,beIN SPORTS XTRA 1 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/38639
+#EXTINF:-1,beIN SPORTS XTRA 2 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/25735
+#EXTINF:-1,beIN SPORTS XTRA 2 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/38640
+#EXTINF:-1,beIN SPORTS XTRA 3 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/25738
+#EXTINF:-1,beIN SPORTS XTRA 3 UHD
+http://magott.net:80/morad-assurance/29KQUPABHs/61461
+#EXTINF:-1,beIN SPORTS AFC HD
+http://magott.net:80/morad-assurance/29KQUPABHs/50461
+#EXTINF:-1,beIN SPORTS AFC 1 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/50462
+#EXTINF:-1,beIN SPORTS AFC 2 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/50463
+#EXTINF:-1,beIN SPORTS AFC 3 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/50464
+#EXTINF:-1,beIN SPORTS NBA HD  
+http://magott.net:80/morad-assurance/29KQUPABHs/38943
+#EXTINF:-1,beIN MAX 1 LQ
+http://magott.net:80/morad-assurance/29KQUPABHs/16367
+#EXTINF:-1,beIN MAX 1 SD
+http://magott.net:80/morad-assurance/29KQUPABHs/38353
+#EXTINF:-1,beIN MAX 1 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/38354
+#EXTINF:-1,beIN MAX 1 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/38435
+#EXTINF:-1,beIN MAX 1 HD s3
+http://magott.net:80/morad-assurance/29KQUPABHs/101941
+#EXTINF:-1,beIN MAX 1 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/38363
+#EXTINF:-1,beIN MAX 2 SD
+http://magott.net:80/morad-assurance/29KQUPABHs/38355
+#EXTINF:-1,beIN MAX 2 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/38356
+#EXTINF:-1,beIN MAX 2 HD s2
+http://magott.net:80/morad-assurance/29KQUPABHs/38436
+#EXTINF:-1,beIN MAX 2 HD s3
+http://magott.net:80/morad-assurance/29KQUPABHs/38370
+#EXTINF:-1,beIN MAX 2 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/38364
+#EXTINF:-1,beIN MAX 3 HD EN
+http://magott.net:80/morad-assurance/29KQUPABHs/38358
+#EXTINF:-1,beIN MAX 3 FHD EN
+http://magott.net:80/morad-assurance/29KQUPABHs/38365
+#EXTINF:-1,beIN MAX 4 SD FR
+http://magott.net:80/morad-assurance/29KQUPABHs/38359
+#EXTINF:-1,beIN MAX 4 HD FR
+http://magott.net:80/morad-assurance/29KQUPABHs/38360
+#EXTINF:-1,beIN MAX 4 FHD FR
+http://magott.net:80/morad-assurance/29KQUPABHs/38366
+#EXTINF:-1,beIN ASIAN CUP 1 SD
+http://magott.net:80/morad-assurance/29KQUPABHs/38367
+#EXTINF:-1,beIN ASIAN CUP 1 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/38362
+#EXTINF:-1,beIN ASIAN CUP 1 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/38361
+#EXTINF:-1,beIN ASIAN CUP 2 SD
+http://magott.net:80/morad-assurance/29KQUPABHs/38432
+#EXTINF:-1,beIN ASIAN CUP 2 HD
+http://magott.net:80/morad-assurance/29KQUPABHs/38431
+#EXTINF:-1,beIN ASIAN CUP 2 FHD
+http://magott.net:80/morad-assurance/29KQUPABHs/38368
